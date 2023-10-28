@@ -710,9 +710,9 @@ private:
     /// Enable pin for stepper driver, or 0xFF if unused.
     uint8_t        _enablePin;
 
-    uint8_t _microstepLevel;
+    uint8_t        _microstepLevel;
 
-    uint8_t[3] _microstepPins;
+    uint8_t        _microstepPins[2];
 
     /// The pointer to a forward-step procedure
     void (*_forward)();
