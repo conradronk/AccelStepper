@@ -536,6 +536,10 @@ public:
     /// \sa setPinsInverted
     void    setEnablePin(uint8_t enablePin = 0xff);
 
+    void setMicrostepPins(uint8_t pin0, uint8_t pin1);
+
+    void setMicrostepLevel(uint8_t level);
+
     /// Sets the inversion for stepper driver pins
     /// \param[in] directionInvert True for inverted direction pin, false for non-inverted
     /// \param[in] stepInvert      True for inverted step pin, false for non-inverted
@@ -705,6 +709,10 @@ private:
 
     /// Enable pin for stepper driver, or 0xFF if unused.
     uint8_t        _enablePin;
+
+    uint8_t _microstepLevel;
+
+    uint8_t[3] _microstepPins;
 
     /// The pointer to a forward-step procedure
     void (*_forward)();

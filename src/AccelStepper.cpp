@@ -620,6 +620,52 @@ void AccelStepper::setEnablePin(uint8_t enablePin)
     }
 }
 
+// Write overloads as needed
+void AccelStepper::setMicrostepPins(uint8_t pin0, uint8_t pin1) {
+    _microstepPins[0] = pin0;
+    _microstepPins[1] = pin1;
+}
+
+void setMicrostepLevel(uint8_t level) {
+    _microstepLevel = level;
+    switch (level) {
+        case 1: // 1/2 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], LOW); // 0
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], HIGH); // 1
+            break;
+        case 2: // 1/4 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], LOW); // 0
+            pinMode(_microstepPins[1], INPUT); // High Z
+            break;
+        case 3: // 1/8 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], HIGH); // 1
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], LOW); // 0
+            break;
+        case 4: // 1/16 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], HIGH); // 1
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], HIGH); // 1
+            break;
+        case 5: // 1/32 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], HIGH); // 1
+            pinMode(_microstepPins[1], INPUT); // High Z
+            break;
+        default:
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], LOW); // 0
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[1], LOW); // 0
+            break;
+    }
+}
+
 void AccelStepper::setPinsInverted(bool directionInvert, bool stepInvert, bool enableInvert)
 {
     _pinInverted[0] = stepInvert;
