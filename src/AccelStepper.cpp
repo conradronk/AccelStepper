@@ -637,20 +637,21 @@ void AccelStepper::setMicrostepLevel(uint8_t level) {
     switch (level) {
         case 1: // 1/2 step
             pinMode(_microstepPins[0], OUTPUT);
-            digitalWrite(_microstepPins[0], LOW); // 0
-            pinMode(_microstepPins[1], OUTPUT);
-            digitalWrite(_microstepPins[1], HIGH); // 1
-            break;
-        case 2: // 1/4 step
-            pinMode(_microstepPins[0], OUTPUT);
-            digitalWrite(_microstepPins[0], LOW); // 0
-            pinMode(_microstepPins[1], INPUT); // High Z
-            break;
-        case 3: // 1/8 step
-            pinMode(_microstepPins[0], OUTPUT);
             digitalWrite(_microstepPins[0], HIGH); // 1
             pinMode(_microstepPins[1], OUTPUT);
             digitalWrite(_microstepPins[1], LOW); // 0
+            break;
+        case 2: // 1/4 step
+            pinMode(_microstepPins[0], INPUT); // High Z
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], LOW); // 0
+            
+            break;
+        case 3: // 1/8 step
+            pinMode(_microstepPins[0], OUTPUT);
+            digitalWrite(_microstepPins[0], LOW); // 1
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], HIGH); // 0
             break;
         case 4: // 1/16 step
             pinMode(_microstepPins[0], OUTPUT);
@@ -659,9 +660,10 @@ void AccelStepper::setMicrostepLevel(uint8_t level) {
             digitalWrite(_microstepPins[1], HIGH); // 1
             break;
         case 5: // 1/32 step
-            pinMode(_microstepPins[0], OUTPUT);
-            digitalWrite(_microstepPins[0], HIGH); // 1
-            pinMode(_microstepPins[1], INPUT); // High Z
+            pinMode(_microstepPins[0], INPUT); // High Z
+            pinMode(_microstepPins[1], OUTPUT);
+            digitalWrite(_microstepPins[1], HIGH); // 1
+            
             break;
         default:
             pinMode(_microstepPins[0], OUTPUT);
