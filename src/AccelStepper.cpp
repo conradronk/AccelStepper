@@ -632,7 +632,7 @@ void AccelStepper::setMicrostepPins(uint8_t pin0, uint8_t pin1) {
     _microstepPins[1] = pin1;
 }
 
-void setMicrostepLevel(uint8_t level) {
+void AccelStepper::setMicrostepLevel(uint8_t level) {
     _microstepLevel = level;
     switch (level) {
         case 1: // 1/2 step
